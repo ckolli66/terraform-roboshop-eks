@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "example" {
-  name = "example"
+  name = var.env
   role_arn = aws_iam_role.cluster.arn
   version  = "1.35"
 
@@ -11,10 +11,10 @@ resource "aws_eks_cluster" "example" {
   }
 }
 
-resource "aws_eks_node_group"  "example" {
+resource "aws_eks_node_group"  "node" {
   cluster_name = aws_eks_cluster.example.name
   node_group_name = "example"
-  node_role_arn   = aws_iam_role.example.arn
+  node_role_arn   = aws_iam_role.node.arn
   subnet_ids      = ["subnet-0edfbefd92844afcd","subnet-0301e9e21d6e797cf"]
 
   scaling_config {
