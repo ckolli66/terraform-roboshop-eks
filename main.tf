@@ -16,6 +16,8 @@ resource "aws_eks_node_group"  "node" {
   node_group_name = "example"
   node_role_arn   = aws_iam_role.node.arn
   subnet_ids      = ["subnet-0edfbefd92844afcd","subnet-0301e9e21d6e797cf"]
+  instance_types  = ["t3.xlarge","t3.2xlarge"]
+  capacity_type   = "SPOT"
 
   scaling_config {
 	desired_size = 1
@@ -26,6 +28,11 @@ resource "aws_eks_node_group"  "node" {
   update_config {
 	max_unavailable = 1
   }
+  depends_on = [
+	aws_iam_role_policy_attachment.node-AmazonEKSWorkerNodePolicy,
+	aws_iam_role_policy_attachment.node-AmazonEKS_CNI_Policy,
+	aws_iam_role_policy_attachment.node-AmazonEC2ContainerRegistryReadOnly,
+  ]
 }
 
 resource "aws_eks_access_entry" "workstation" {
