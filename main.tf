@@ -52,6 +52,9 @@ resource "aws_eks_access_policy_association" "workstation" {
 }
 
 resource "null_resource" "update-kubeconfig" {
+
+  depends_on = [aws_eks_cluster.example,aws_eks_node_group.node]
+
   triggers = {
 	cluster = timestamp()
   }
