@@ -27,7 +27,7 @@ resource "helm_release" "prometheus" {
   name       = "prometheus"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
-  values     = [file("prometheus-scrapeValues")]
+  values     = [file("prometheus-scrapeValues.yml")]
 
   set = [
 	{
