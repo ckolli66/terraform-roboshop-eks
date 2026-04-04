@@ -40,3 +40,13 @@ resource "helm_release" "prometheus" {
 	}
   ]
 }
+
+resource "helm_release" "nginx-ingress" {
+
+  depends_on = [null_resource.update-kubeconfig]
+
+  name       = "ingress"
+  repository = "https://kubernetes.github.io/ingress-nginx"
+  chart      = "ingress-nginx"
+
+}
