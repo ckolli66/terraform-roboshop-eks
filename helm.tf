@@ -51,12 +51,12 @@ resource "helm_release" "nginx-ingress" {
 
 }
 ## With the help of this external dns tool whenever I create nginx ingress it automatically creates route 53 record in aws
-
-resource "helm_release" "external-dns" {
-
-  depends_on = [null_resource.update-kubeconfig]
-
-  name       = "external-dns-routing"
-  repository = "https://kubernetes-sigs.github.io/external-dns/"
-  chart      = "external-dns"
-}
+#
+# resource "helm_release" "external-dns" {
+#
+#   depends_on = [null_resource.update-kubeconfig]
+#
+#   name       = "external-dns-routing"
+#   repository = "https://kubernetes-sigs.github.io/external-dns/"
+#   chart      = "external-dns"
+# }
